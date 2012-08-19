@@ -6,13 +6,12 @@
     <link rel="stylesheet" href="/static/normalize.css">
     <link rel="stylesheet" href="/static/style.css">
 </head>
-<body>
+<body onload="window.scrollBy(0,999999)">
     <h1>docopt</h1>
     <h2>Try</h2>
     <pre>docopt 0.5.0 (Python reference implementation); output: JSON</pre>
     <form action="/" method=post>
-
-        <textarea name=doc>{{ doc }}</textarea>
+        <textarea name=doc rows=18 >{{ doc }}</textarea>
         <!--p><textarea id=term readonly>{{ args }}</textarea></p>
         <script type="text/javascript" >
             var textArea = document.getElementById('term');
