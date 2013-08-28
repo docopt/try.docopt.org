@@ -45,16 +45,19 @@ def run_docopt(doc, argv):
     return result
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def hello():
-    if request.method == 'POST':
-        args = run_docopt(request.form['doc'], request.form['argv'])
-        return render('index.html', args=args,
-                      doc=request.form['doc'],
-                      argv=request.form['argv'])
+    if 'doc' in request.args and 'argv' in request.args:
+        doc = request.args['doc']
+        argv = request.args['argv']
+        args = run_docopt(request.args['doc'], request.args['argv'])
     else:
-        return render('index.html', doc=__doc__,
-                                    argv='ship Guardian move 10 50 --speed=20')
+        doc = __doc__
+        argv = 'ship Guardian move 10 50 --speed=20'
+        args = ''
+    return render('index.html', args=args,
+                      doc=doc,
+                      argv=argv)
 
 
 if __name__ == '__main__':
