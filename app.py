@@ -16,7 +16,7 @@ Options:
   --drifting    Drifting mine.
 
 """
-import os, sys, traceback, json
+import os, sys, traceback, json, shlex
 from StringIO import StringIO
 
 from flask import Flask, render_template as render, request
@@ -27,6 +27,10 @@ app = Flask(__name__)
 
 
 def run_docopt(doc, argv):
+    try:
+        argv = shlex.split(argv)
+    except ValueError:
+        pass
     real_stdout, sys.stdout = sys.stdout, StringIO()
     real_stderr, sys.stderr = sys.stderr, StringIO()
     try:
